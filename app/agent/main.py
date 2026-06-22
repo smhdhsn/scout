@@ -1,13 +1,19 @@
-from core.capture import Screen
 import cv2
+
+from core.capture import Screen
+from core.window import find_window
 
 
 def main():
-    screen = Screen()
+    game_window = find_window("FPV.SkyDive")
 
-    img = screen.grab()
+    screen = Screen(game_window)
 
-    screen.close()
+    img = screen.capture()
+
+    cv2.imshow("unknown", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":

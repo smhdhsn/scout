@@ -1,3 +1,5 @@
-mss==10.2.0
 numpy==2.5.0
 opencv-python==4.13.0.92
+pyobjc-core==12.2.1
+pyobjc-framework-Cocoa==12.2.1
+pyobjc-framework-Quartz==12.2.1

@@ -1,24 +1,32 @@
-import mss
 import numpy as np
+import Quartz
+
+from core.models import Window
 
 
 class Screen:
-    def __init__(self, monitor: int = 1):
-        self._capturer = mss.mss()
-        self._monitor = self._capturer.monitors[monitor]
+    def __init__(self, window: Window):
+        self._window_id = window.window_id
 
-    def grab(self) -> np.ndarray:
-        raw = self._capturer.grab(self._monitor)
+    def capture(self) -> np.ndarray:
+        image = Quartz.CGWindowListCreateImage(
+            Quartz.CGRectNull,
+            Quartz.kCGWindowListOptionIncludingWindow,
+            self._window_id,
+            Quartz.kCGWindowImageBoundsIgnoreFraming,
+        )
 
-        sliced_img = np.array(raw)[:, :, :3]
+        return _cgimage_to_bgr(image)
 
-        return np.ascontiguousarray(sliced_img)
 
-    def close(self):
-        self._capturer.close()
+def _cgimage_to_bgr(image) -> np.ndarray:
+    width = Quartz.CGImageGetWidth(image)
+    height = Quartz.CGImageGetHeight(image)
+    bytes_per_row = Quartz.CGImageGetBytesPerRow(image)
 
-    def __enter__(self):
-        return self
+    data = Quartz.CGDataProviderCopyData(Quartz.CGImageGetDataProvider(image))
 
-    def __exit__(self, *exc):
-        self.close()
+    buffer = np.frombuffer(data, dtype=np.uint8)
+    pixels = buffer.reshape((height, bytes_per_row // 4, 4))
+
+    return np.ascontiguousarray(pixels[:, :width, :3])
