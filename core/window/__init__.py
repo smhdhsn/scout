@@ -1,5 +1,5 @@
 """
-Locate on-screen windows by owner name, returning clean domain types.
+Locate on-screen windows.
 """
 
 from .selector import find_window

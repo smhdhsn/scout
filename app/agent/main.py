@@ -11,9 +11,11 @@ Box = tuple[int, int, int, int]
 
 Action = str
 
+GAME = "FPV.SkyDive"
+
 
 def main() -> None:
-    screen = Screen(window=find_window("FPV.SkyDive"))
+    screen = Screen(window=find_window(GAME))
     open_preview()
 
     while True:

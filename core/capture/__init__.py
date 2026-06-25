@@ -1,6 +1,5 @@
 """
-This module is responsible for reading the screen, preparing an image for the agent to use as the input.
-We'll use `mss` library for capturing.
+Capture the screen as an image for the agent to use as input.
 """
 
 from .screen import Screen

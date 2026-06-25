@@ -1,6 +1,5 @@
 """
-The Drone API an agent calls, a controller that injects input,
-and a daemon that streams the current control frame to the game.
+Drone control: the API an agent calls and the machinery that drives the game.
 """
 
 from .controller import Controller

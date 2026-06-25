@@ -1,5 +1,5 @@
 """
-This module contains models that will be used throughout the codebase.
+Shared domain models used throughout the codebase.
 """
 
 from .rect import Rect
