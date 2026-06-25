@@ -14,7 +14,8 @@ from core.control.keyboard import KeyboardController
 # Each value is a single rate (both directions the same) OR a
 # (negative_dir, positive_dir) pair when one direction is faster — e.g.
 # "pitch": (520.0, 510.0) means pitch-down (back flip) 520, pitch-up (front) 510.
-# Tuned against the game; open-loop, so treat as close-enough. See CALIBRATION.md.
+# Tuned against the game; open-loop, so treat as close-enough. Calibration notes
+# live inline in the comments beside each value — re-tune there if the game drifts.
 DEFAULT_ROTATION_RATES: dict[str, float | tuple[float, float]] = {
     "pitch": 510.0,  # calibrated: a 360 front flip looks right
     "roll": 595.0,  # calibrated: 360 command did ~420 -> 510 * 420/360
