@@ -1,4 +1,7 @@
-run_agent:
+agent:
 	@python -m app.agent.main
 
-.PHONY: run_agent
+warmup:
+	@python -m app.warmup.main
+
+.PHONY: agent warmup

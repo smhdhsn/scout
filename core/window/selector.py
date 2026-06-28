@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import Quartz
 
-from core.models import Rect, Window
+from core.models import Window
 
 
 def find_window(owner_name: str) -> Window:
@@ -29,17 +29,7 @@ def _area(window) -> float:
 
 
 def _to_window(window) -> Window:
-    bounds = window["kCGWindowBounds"]
-
-    rect = Rect(
-        x=int(bounds["X"]),
-        y=int(bounds["Y"]),
-        width=int(bounds["Width"]),
-        height=int(bounds["Height"]),
-    )
-
     return Window(
         owner=window.get("kCGWindowOwnerName", ""),
         window_id=int(window.get("kCGWindowNumber", 0)),
-        bounds=rect,
     )
